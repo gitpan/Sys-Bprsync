@@ -1,6 +1,6 @@
 package Sys::Bprsync::Cmd::Command;
 {
-  $Sys::Bprsync::Cmd::Command::VERSION = '0.17';
+  $Sys::Bprsync::Cmd::Command::VERSION = '0.24';
 }
 BEGIN {
   $Sys::Bprsync::Cmd::Command::AUTHORITY = 'cpan:TEX';
@@ -72,7 +72,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 

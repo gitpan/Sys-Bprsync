@@ -1,6 +1,6 @@
 package Sys::Bprsync::Worker;
 {
-  $Sys::Bprsync::Worker::VERSION = '0.17';
+  $Sys::Bprsync::Worker::VERSION = '0.24';
 }
 BEGIN {
   $Sys::Bprsync::Worker::AUTHORITY = 'cpan:TEX';
@@ -69,18 +69,22 @@ foreach my $key (qw(execpre execpost exclude)) {
 # Str - not required
 foreach my $key (qw(description source destination timeframe excludefrom options rsh rshopts)) {
     has $key => (
-        'is'       => 'ro',
-        'isa'      => 'Str',
-        'required' => 0,
+        'is'        => 'ro',
+        'isa'       => 'Str',
+        'required'  => 0,
+        'clearer'   => 'clear_'.$key,
+        'predicate' => 'has_'.$key,
     );
 }
 
 # Bool - not required - default 0
-foreach my $key (qw(compression numericids verbose delete nocrossfs hardlink dry)) {
+foreach my $key (qw(compression numericids verbose delete nocrossfs hardlink dry sudo)) {
     has $key => (
-        'is'       => 'ro',
-        'isa'      => 'Bool',
-        'required' => 0,
+        'is'        => 'ro',
+        'isa'       => 'Bool',
+        'required'  => 0,
+        'clearer'   => 'clear_'.$key,
+        'predicate' => 'has_'.$key,
     );
 }
 
@@ -90,6 +94,8 @@ foreach my $key (qw(bwlimit)) {
         'is'       => 'ro',
         'isa'      => 'Int',
         'required' => 0,
+        'clearer'   => 'clear_'.$key,
+        'predicate' => 'has_'.$key,
     );
 }
 has 'runloops' => (
@@ -111,6 +117,12 @@ has 'logfile' => (
     'builder' => '_init_logfile',
 );
 
+has '_init_done' => (
+  'is'      => 'rw',
+  'isa'     => 'Bool',
+  'default' => 0,
+);
+
 sub _init_sys {
     my $self = shift;
 
@@ -120,12 +132,15 @@ sub _init_sys {
 sub _init {
     my $self = shift;
 
+    return 1 if $self->_init_done();
+
     # ok, now we have a config and a job name, we should be able to
     # get everything else from the config ...
     # scalars ...
     my $common_config_prefix = $self->parent()->config_prefix() . q{::} . $self->_job_prefix() . q{::} . $self->name() . q{::};
-    foreach my $key (qw(description timeframe excludefrom rsh rshopts compression options delete numericids bwlimit source destination nocrossfs hardlink)) {
-        if ( !defined( $self->{$key} ) ) {
+    foreach my $key (qw(description timeframe excludefrom rsh rshopts compression options delete numericids bwlimit source destination nocrossfs hardlink sudo)) {
+      my $predicate = 'has_'.$key;
+      if ( !$self->$predicate() ) {
             my $config_key = $common_config_prefix . $key;
             my $val        = $self->parent()->config()->get($config_key);
             if ( defined($val) ) {
@@ -160,6 +175,8 @@ sub _init {
     if ( !$self->source() || !$self->destination() ) {
         croak('Missing source or destination!');
     }
+
+    $self->_init_done(1);
 
     return 1;
 }
@@ -489,7 +506,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 

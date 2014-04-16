@@ -1,6 +1,6 @@
 package Sys::Bprsync::Job;
 {
-  $Sys::Bprsync::Job::VERSION = '0.17';
+  $Sys::Bprsync::Job::VERSION = '0.24';
 }
 BEGIN {
   $Sys::Bprsync::Job::AUTHORITY = 'cpan:TEX';
@@ -72,7 +72,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
