@@ -1,6 +1,6 @@
 package Sys::Bprsync;
 {
-  $Sys::Bprsync::VERSION = '0.24';
+  $Sys::Bprsync::VERSION = '0.25';
 }
 BEGIN {
   $Sys::Bprsync::AUTHORITY = 'cpan:TEX';
@@ -90,7 +90,10 @@ with qw(Config::Yak::RequiredConfig Log::Tree::RequiredLogger);
 sub _init_sys {
     my $self = shift;
 
-    my $Sys = Sys::Run::->new( { 'logger' => $self->logger(), } );
+    my $Sys = Sys::Run::->new( {
+      'logger'            => $self->logger(),
+      'ssh_hostkey_check' => 0,
+    } );
 
     return $Sys;
 }

@@ -38,7 +38,6 @@ requires:
   strict: 0
   warnings: 0
 resources:
-  bugtracker: https://github.com/gittex/Sys-Bprsync/issues
   repository: git://github.com/gittex/Sys-Bprsync.git
-version: 0.24
+version: 0.25
 x_authority: cpan:TEX

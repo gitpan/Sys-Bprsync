@@ -1,6 +1,6 @@
 package Sys::Bprsync::Cmd::Command::run;
 {
-  $Sys::Bprsync::Cmd::Command::run::VERSION = '0.24';
+  $Sys::Bprsync::Cmd::Command::run::VERSION = '0.25';
 }
 BEGIN {
   $Sys::Bprsync::Cmd::Command::run::AUTHORITY = 'cpan:TEX';

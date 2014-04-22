@@ -61,16 +61,13 @@
    },
    "release_status" : "stable",
    "resources" : {
-      "bugtracker" : {
-         "web" : "https://github.com/gittex/Sys-Bprsync/issues"
-      },
       "repository" : {
          "type" : "git",
          "url" : "git://github.com/gittex/Sys-Bprsync.git",
          "web" : "https://github.com/gittex/Sys-Bprsync"
       }
    },
-   "version" : "0.24",
+   "version" : "0.25",
    "x_authority" : "cpan:TEX"
 }
 

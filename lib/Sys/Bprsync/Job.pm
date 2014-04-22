@@ -1,6 +1,6 @@
 package Sys::Bprsync::Job;
 {
-  $Sys::Bprsync::Job::VERSION = '0.24';
+  $Sys::Bprsync::Job::VERSION = '0.25';
 }
 BEGIN {
   $Sys::Bprsync::Job::AUTHORITY = 'cpan:TEX';

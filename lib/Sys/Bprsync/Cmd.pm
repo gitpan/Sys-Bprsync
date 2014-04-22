@@ -1,6 +1,6 @@
 package Sys::Bprsync::Cmd;
 {
-  $Sys::Bprsync::Cmd::VERSION = '0.24';
+  $Sys::Bprsync::Cmd::VERSION = '0.25';
 }
 BEGIN {
   $Sys::Bprsync::Cmd::AUTHORITY = 'cpan:TEX';

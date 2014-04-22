@@ -1,6 +1,6 @@
 package Sys::Bprsync::Worker;
 {
-  $Sys::Bprsync::Worker::VERSION = '0.24';
+  $Sys::Bprsync::Worker::VERSION = '0.25';
 }
 BEGIN {
   $Sys::Bprsync::Worker::AUTHORITY = 'cpan:TEX';
@@ -299,16 +299,15 @@ sub _rsync_cmd {
             # for e.g. password-file
             $opts .= q{ } . $self->rshopts();
         }
-    }
-    else {
+    } else { # ssh mode
         if ( $self->rsh() ) {
-            $opts .= ' -e "' . $self->rsh();
-            if ( $self->rsh() eq 'ssh' ) {
-                $opts .= ' -oBatchMode=yes';
-            }
+          $opts .= ' -e "' . $self->rsh();
+          if ( $self->rsh() eq 'ssh' ) {
+            $opts .= $self->sys()->_ssh_opts();
+          }
         }
         else {
-            $opts .= ' -e "ssh -oBatchMode=yes';
+          $opts .= ' -e "ssh '.$self->sys()->_ssh_opts();
         }
         if ( $self->rshopts() ) {
             $opts .= q{ } . $self->rshopts();
